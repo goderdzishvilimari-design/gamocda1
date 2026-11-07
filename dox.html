@@ -1,0 +1,3051 @@
+<!DOCTYPE html>
+<html lang="ka">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="JOY Fun Center — გართობა, დაბადების დღეები და დაუვიწყარი გამოცდილება ყველა ასაკისთვის."
+    >
+
+    <title>JOY Fun Center</title>
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         MAIN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- =====================================================
+         ADDITIONAL CSS
+    ====================================================== -->
+
+    <style>
+
+        /* =====================================================
+           GENERAL
+        ====================================================== */
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        /* =====================================================
+           INFORMATION MODALS
+        ====================================================== */
+
+        .info-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.78);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 9999;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition: 0.3s ease;
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        .info-modal.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+
+        .info-modal-content {
+
+            position: relative;
+
+            width: min(700px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #111625;
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55);
+
+            transform:
+                translateY(30px)
+                scale(0.96);
+
+            transition: 0.3s ease;
+        }
+
+
+        .info-modal.show .info-modal-content {
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+
+        /* =====================================================
+           MODAL CLOSE
+        ====================================================== */
+
+        .modal-close {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 20px;
+
+            width: 42px;
+
+            height: 42px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            color: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+
+            display: grid;
+
+            place-items: center;
+        }
+
+
+        .modal-close:hover {
+
+            background: #ffd21c;
+
+            color: #111;
+
+            transform: rotate(90deg);
+        }
+
+
+        /* =====================================================
+           MODAL ICON
+        ====================================================== */
+
+        .modal-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            background: #ffd21c;
+
+            color: #111;
+
+            font-size: 32px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           MODAL TEXT
+        ====================================================== */
+
+        .info-modal-content h2 {
+
+            font-size: 32px;
+
+            line-height: 1.3;
+
+            margin: 0 0 15px;
+
+            color: white;
+        }
+
+
+        .modal-description {
+
+            color:
+                rgba(255, 255, 255, 0.68);
+
+            line-height: 1.8;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           MODAL ITEMS
+        ====================================================== */
+
+        .modal-items {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .modal-item {
+
+            padding: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 14px;
+
+            color: white;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           MODAL PRICE
+        ====================================================== */
+
+        .modal-price {
+
+            padding: 18px;
+
+            background:
+                rgba(255, 210, 28, 0.1);
+
+            border:
+                1px solid
+                rgba(255, 210, 28, 0.3);
+
+            border-radius: 14px;
+
+            color: #ffd21c;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           AGE CARDS
+        ====================================================== */
+
+        .age-button {
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+
+        .age-button:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #ffd21c;
+        }
+
+
+        .age-button:active {
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           ACTIVITY CARDS
+        ====================================================== */
+
+        .activity-card {
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .activity-card:hover {
+
+            transform: translateY(-6px);
+        }
+
+
+        .activity-more {
+
+            border: none;
+
+            background: transparent;
+
+            padding: 0;
+
+            margin-top: 15px;
+
+            font-family: inherit;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            color: #ffd21c;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL
+        ====================================================== */
+
+        .activity-modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.78);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            z-index: 10000;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition: 0.3s ease;
+
+            backdrop-filter: blur(8px);
+        }
+
+
+        .activity-modal.show {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+
+        .activity-modal-content {
+
+            position: relative;
+
+            width: min(700px, 100%);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: #111625;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            border-radius: 25px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 30px 80px
+                rgba(0, 0, 0, 0.55);
+
+            transform:
+                translateY(30px)
+                scale(0.96);
+
+            transition: 0.3s ease;
+        }
+
+
+        .activity-modal.show
+        .activity-modal-content {
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL CLOSE
+        ====================================================== */
+
+        .activity-modal-close {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 20px;
+
+            width: 42px;
+
+            height: 42px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            color: white;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+
+            display: grid;
+
+            place-items: center;
+        }
+
+
+        .activity-modal-close:hover {
+
+            background: #ffd21c;
+
+            color: #111;
+
+            transform: rotate(90deg);
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL ICON
+        ====================================================== */
+
+        .activity-modal-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            display: grid;
+
+            place-items: center;
+
+            background: #ffd21c;
+
+            color: #111;
+
+            font-size: 32px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL TITLE
+        ====================================================== */
+
+        .activity-modal-content h2 {
+
+            font-size: 32px;
+
+            line-height: 1.3;
+
+            margin: 0 0 15px;
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL DESCRIPTION
+        ====================================================== */
+
+        .activity-modal-description {
+
+            color:
+                rgba(255, 255, 255, 0.68);
+
+            line-height: 1.8;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL ITEMS
+        ====================================================== */
+
+        .activity-modal-items {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .activity-modal-item {
+
+            padding: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 14px;
+
+            color: white;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           ACTIVITY MODAL PRICE
+        ====================================================== */
+
+        .activity-modal-price {
+
+            padding: 18px;
+
+            background:
+                rgba(255, 210, 28, 0.1);
+
+            border:
+                1px solid
+                rgba(255, 210, 28, 0.3);
+
+            border-radius: 14px;
+
+            color: #ffd21c;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .info-modal-content,
+            .activity-modal-content {
+
+                padding: 30px 20px;
+
+                border-radius: 20px;
+            }
+
+
+            .info-modal-content h2,
+            .activity-modal-content h2 {
+
+                font-size: 25px;
+            }
+
+
+            .modal-items,
+            .activity-modal-items {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .modal-icon,
+            .activity-modal-icon {
+
+                width: 60px;
+
+                height: 60px;
+
+                font-size: 28px;
+            }
+
+
+            .modal-close,
+            .activity-modal-close {
+
+                width: 38px;
+
+                height: 38px;
+
+                top: 12px;
+
+                right: 12px;
+
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="container navbar">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="#home"
+                class="logo"
+            >
+
+                <span class="logo-main">
+
+                    J<span>O</span>Y
+
+                </span>
+
+                <small>
+
+                    FUN CENTER
+
+                </small>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="navigation">
+
+                <a
+                    href="#home"
+                    class="active"
+                    data-menu="home"
+                >
+                    მთავარი
+                </a>
+
+
+               <a
+    href="day.html"
+>
+    დაბადების დღის მენიუ
+</a>
+
+
+                <a
+                    href="#"
+                    data-menu="activities"
+                >
+                    აქტივობები
+                </a>
+
+
+                <a
+                    href="#"
+                    data-menu="gallery"
+                >
+                    გალერეა
+                </a>
+
+
+                <a
+                    href="#"
+                    data-menu="about"
+                >
+                    ჩვენ შესახებ
+                </a>
+
+
+                <a
+                    href="#"
+                    data-menu="contact"
+                >
+                    კონტაქტი
+                </a>
+
+            </nav>
+
+
+            <!-- BOOKING BUTTON -->
+
+            <a
+                href="#booking"
+                class="nav-button"
+            >
+                დაგეგმე დღე
+            </a>
+
+
+            <!-- MOBILE MENU -->
+
+            <button
+                class="menu-button"
+                aria-label="მენიუს გახსნა"
+                type="button"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section
+            class="hero"
+            id="home"
+        >
+
+            <div class="container hero-content">
+
+
+                <!-- HERO TEXT -->
+
+                <div class="hero-text">
+
+                    <div class="small-title">
+
+                        JOY FUN CENTER
+
+                    </div>
+
+
+                    <h1>
+
+                        გართობა,<br>
+
+                        <span>
+                            რომელიც ყველას
+                        </span><br>
+
+                        გააბედნიერებს
+
+                    </h1>
+
+
+                    <p>
+
+                        დაბადების დღეები, თამაშები,
+                        თავგადასავლები და დაუვიწყარი
+                        მომენტები — ერთად ერთ სივრცეში.
+
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="#booking"
+                            class="primary-button"
+                        >
+                            🎂 დაგეგმე დაბადების დღე
+                        </a>
+
+
+                        <a
+                            href="#activities"
+                            class="secondary-button"
+                        >
+                            გაიგე მეტი
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- HERO SLIDER -->
+
+                <div class="hero-slider">
+
+
+                    <img
+                        src="https://i.postimg.cc/GmX10LST/joy-photo-1.jpg"
+                        class="slide active"
+                        alt="JOY Fun Center"
+                    >
+
+
+                    <img
+                        src="https://i.postimg.cc/BZTk9ZXk/joy-photo-2.jpg"
+                        class="slide"
+                        alt="JOY Fun Center"
+                    >
+
+
+                    <img
+                        src="https://i.postimg.cc/Gh3MWF0T/joy-photo-3.jpg"
+                        class="slide"
+                        alt="JOY Fun Center"
+                    >
+
+
+                    <img
+                        src="https://i.postimg.cc/KzrNVzJf/joy-photo-4.jpg"
+                        class="slide"
+                        alt="JOY Fun Center"
+                    >
+
+
+                    <div class="slider-overlay"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AGE CATEGORIES
+        ================================================== -->
+
+        <section class="age-section">
+
+            <div class="container age-grid">
+
+
+                <!-- 3–8 -->
+
+                <div
+                    class="age-card age-button"
+                    data-age="kids"
+                >
+
+                    <div class="age-icon yellow">
+
+                        ☺
+
+                    </div>
+
+
+                    <div>
+<a
+    href="day.html"
+>
+    დაბადების დღის მენიუ
+</a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 9–14 -->
+
+                <div
+                    class="age-card age-button"
+                    data-age="teens"
+                >
+
+                    <div class="age-icon green">
+
+                        🎮
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            9–14 წელი
+                        </h3>
+
+                        <p>
+                            თამაშები, თავგადასავლები
+                            და აქტიური გართობა
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- 15–20 -->
+
+                <div
+                    class="age-card age-button"
+                    data-age="young"
+                >
+
+                    <div class="age-icon purple">
+
+                        👥
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            15–20 წელი
+                        </h3>
+
+                        <p>
+                            თავგადასავალი, მუსიკა
+                            და დაუვიწყარი დღე
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <section class="stats-section">
+
+            <div class="container stats-grid">
+
+
+                <div class="stat">
+
+                    <span class="stat-icon">
+                        ✦
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            1000+
+                        </strong>
+
+                        <p>
+                            დაბადების დღე
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <span class="stat-icon">
+                        ☺
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            15 000+
+                        </strong>
+
+                        <p>
+                            ბედნიერი სტუმარი
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <span class="stat-icon">
+                        🎮
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            20+
+                        </strong>
+
+                        <p>
+                            სხვადასხვა შოუ და აქტივობა
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <span class="stat-icon">
+                        ☆
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            5 წელი
+                        </strong>
+
+                        <p>
+                            თქვენთან ერთად
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACTIVITIES
+        ================================================== -->
+
+        <section
+            class="activities"
+            id="activities"
+        >
+
+            <div class="container">
+
+
+                <div class="section-title">
+
+                    <span>
+                        აღმოაჩინე JOY
+                    </span>
+
+                    <h2>
+                        აირჩიე შენი გართობა
+                    </h2>
+
+                    <p>
+                        სხვადასხვა ასაკისთვის
+                        შექმნილი გამოცდილებები.
+                    </p>
+
+                </div>
+
+
+
+                <!-- ACTIVITY CARDS -->
+
+                <div class="activity-grid">
+
+
+                    <!-- GAMES -->
+
+                    <article
+                        class="activity-card"
+                        data-activity="games"
+                    >
+
+                        <div class="activity-image">
+                            🎮
+                        </div>
+
+                        <div class="activity-content">
+
+                            <h3>
+                                თამაშები
+                            </h3>
+
+                            <p>
+                                თანამედროვე თამაშები
+                                და გასართობი სივრცეები.
+                            </p>
+
+                            <button
+                                class="activity-more"
+                                data-activity="games"
+                                type="button"
+                            >
+                                გაიგე მეტი →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- BIRTHDAY -->
+
+                    <article
+                        class="activity-card"
+                        data-activity="birthday"
+                    >
+
+                        <div class="activity-image">
+                            🎂
+                        </div>
+
+                        <div class="activity-content">
+
+                            <h3>
+                                დაბადების დღე
+                            </h3>
+
+                            <p>
+                                შექმენი განსაკუთრებული
+                                დღე შენს მეგობრებთან ერთად.
+                            </p>
+
+                            <button
+                                class="activity-more"
+                                data-activity="birthday"
+                                type="button"
+                            >
+                                გაიგე მეტი →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- ATTRACTIONS -->
+
+                    <article
+                        class="activity-card"
+                        data-activity="attractions"
+                    >
+
+                        <div class="activity-image">
+                            🏎️
+                        </div>
+
+                        <div class="activity-content">
+
+                            <h3>
+                                ატრაქციონები
+                            </h3>
+
+                            <p>
+                                ემოციებით სავსე აქტივობები
+                                ყველა ასაკისთვის.
+                            </p>
+
+                            <button
+                                class="activity-more"
+                                data-activity="attractions"
+                                type="button"
+                            >
+                                გაიგე მეტი →
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             BOOKING
+        ================================================== -->
+
+        <section
+            class="booking"
+            id="booking"
+        >
+
+            <div class="container booking-content">
+
+                <div>
+
+                    <span>
+                        READY FOR JOY?
+                    </span>
+
+                    <h2>
+                        შენი დაუვიწყარი დღე
+                        აქ იწყება.
+                    </h2>
+
+                </div>
+
+
+                <a
+                    href="#contact"
+                    class="primary-button"
+                >
+                    დაგვიკავშირდი →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer id="contact">
+
+        <div class="container footer-content">
+
+
+            <!-- LOGO -->
+
+            <div class="footer-logo">
+
+                <div class="logo-main">
+                    JOY
+                </div>
+
+                <p>
+                    FUN CENTER
+                </p>
+
+            </div>
+
+
+
+            <!-- NAVIGATION -->
+
+            <div>
+
+                <h4>
+                    ნავიგაცია
+                </h4>
+
+
+                <a
+                    href="#home"
+                    data-footer-menu="home"
+                >
+                    მთავარი
+                </a>
+
+
+                <a href="#activities">
+                    აქტივობები
+                </a>
+
+
+                <a href="#booking">
+                    დაჯავშნა
+                </a>
+
+            </div>
+
+
+
+            <!-- CONTACT -->
+
+            <div>
+
+                <h4>
+                    კონტაქტი
+                </h4>
+
+
+                <p>
+                    📞 +995 571 81 11 88
+                </p>
+
+
+                <p>
+                    📍 თბილისი: ცოტნე დადიანის ქუჩა N195
+                </p>
+
+
+                <p>
+                    📧 info@joyful.ge
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 JOY Fun Center
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         TOP MENU MODAL
+    ====================================================== -->
+
+    <div
+        id="infoModal"
+        class="info-modal"
+    >
+
+        <div class="info-modal-content">
+
+
+            <button
+                id="closeModal"
+                class="modal-close"
+                aria-label="ფანჯრის დახურვა"
+                type="button"
+            >
+                ×
+            </button>
+
+
+            <div
+                id="modalIcon"
+                class="modal-icon"
+            >
+                🎉
+            </div>
+
+
+            <h2 id="modalTitle"></h2>
+
+
+            <p
+                id="modalDescription"
+                class="modal-description"
+            ></p>
+
+
+            <div
+                id="modalItems"
+                class="modal-items"
+            ></div>
+
+
+            <div
+                id="modalPrice"
+                class="modal-price"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         AGE MODAL
+    ====================================================== -->
+
+    <div
+        id="ageModal"
+        class="info-modal"
+    >
+
+        <div class="info-modal-content">
+
+
+            <button
+                id="closeAgeModal"
+                class="modal-close"
+                aria-label="ფანჯრის დახურვა"
+                type="button"
+            >
+                ×
+            </button>
+
+
+            <div
+                id="ageModalIcon"
+                class="modal-icon"
+            >
+                🎮
+            </div>
+
+
+            <h2 id="ageModalTitle"></h2>
+
+
+            <p
+                id="ageModalDescription"
+                class="modal-description"
+            ></p>
+
+
+            <div
+                id="ageModalItems"
+                class="modal-items"
+            ></div>
+
+
+            <div
+                id="ageModalPrice"
+                class="modal-price"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         ACTIVITY MODAL
+    ====================================================== -->
+
+    <div
+        id="activityModal"
+        class="activity-modal"
+    >
+
+        <div class="activity-modal-content">
+
+
+            <button
+                id="closeActivityModal"
+                class="activity-modal-close"
+                aria-label="დახურვა"
+                type="button"
+            >
+                ×
+            </button>
+
+
+            <div
+                id="activityModalIcon"
+                class="activity-modal-icon"
+            >
+                🎮
+            </div>
+
+
+            <h2 id="activityModalTitle"></h2>
+
+
+            <p
+                id="activityModalDescription"
+                class="activity-modal-description"
+            ></p>
+
+
+            <div
+                id="activityModalItems"
+                class="activity-modal-items"
+            ></div>
+
+
+            <div
+                id="activityModalPrice"
+                class="activity-modal-price"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           PHOTO SLIDER
+        ====================================================== */
+
+        const slides =
+            document.querySelectorAll(".slide");
+
+        let currentSlide = 0;
+
+
+        function nextSlide() {
+
+            if (slides.length <= 1) {
+
+                return;
+
+            }
+
+
+            slides[currentSlide]
+                .classList
+                .remove("active");
+
+
+            currentSlide++;
+
+
+            if (currentSlide >= slides.length) {
+
+                currentSlide = 0;
+
+            }
+
+
+            slides[currentSlide]
+                .classList
+                .add("active");
+
+        }
+
+
+        if (slides.length > 1) {
+
+            setInterval(
+                nextSlide,
+                4000
+            );
+
+        }
+
+
+
+        /* =====================================================
+           MOBILE MENU
+        ====================================================== */
+
+        const menuButton =
+            document.querySelector(
+                ".menu-button"
+            );
+
+        const navigation =
+            document.querySelector(
+                ".navigation"
+            );
+
+
+        if (
+            menuButton &&
+            navigation
+        ) {
+
+            menuButton.addEventListener(
+                "click",
+                function() {
+
+                    navigation.classList.toggle(
+                        "mobile-open"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           NAVIGATION LINKS
+        ====================================================== */
+
+        const navigationLinks =
+            document.querySelectorAll(
+                ".navigation a"
+            );
+
+
+        navigationLinks.forEach(
+            function(link) {
+
+                link.addEventListener(
+                    "click",
+                    function() {
+
+                        navigationLinks.forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        if (navigation) {
+
+                            navigation.classList.remove(
+                                "mobile-open"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           TOP MENU MODAL ELEMENTS
+        ====================================================== */
+
+        const infoModal =
+            document.getElementById(
+                "infoModal"
+            );
+
+        const closeModal =
+            document.getElementById(
+                "closeModal"
+            );
+
+        const modalIcon =
+            document.getElementById(
+                "modalIcon"
+            );
+
+        const modalTitle =
+            document.getElementById(
+                "modalTitle"
+            );
+
+        const modalDescription =
+            document.getElementById(
+                "modalDescription"
+            );
+
+        const modalItems =
+            document.getElementById(
+                "modalItems"
+            );
+
+        const modalPrice =
+            document.getElementById(
+                "modalPrice"
+            );
+
+
+
+        /* =====================================================
+           TOP MENU INFORMATION
+        ====================================================== */
+
+        const menuInformation = {
+
+
+            birthdays: {
+
+                icon: "🎂",
+
+                title:
+                    "დაბადების დღის აქტივობები",
+
+                description:
+                    "შექმენი დაუვიწყარი დაბადების დღე მეგობრებთან ერთად JOY Fun Center-ში.",
+
+                items: [
+
+                    "🎮 გასართობი თამაშები",
+
+                    "🎈 ბუშტების შოუ",
+
+                    "🔥 სპეციალური შოუები",
+
+                    "🎉 სადღესასწაულო პროგრამა",
+
+                    "🍕 საკვები და სასმელი",
+
+                    "📸 ფოტოებისთვის მოწყობილი სივრცე"
+
+                ],
+
+                price:
+                    "ფასი: 50 ₾-დან"
+
+            },
+
+
+            activities: {
+
+                icon: "🎮",
+
+                title:
+                    "გასართობი აქტივობები",
+
+                description:
+                    "აირჩიე სასურველი აქტივობა და გაატარე დაუვიწყარი დრო JOY Fun Center-ში.",
+
+                items: [
+
+                    "🎮 სხვადასხვა გასართობი თამაშები",
+
+                    "🥽 ვირტუალური რეალობა",
+
+                    "🔥 ცეცხლის შოუ",
+
+                    "🎈 ბუშტების შოუ",
+
+                    "🎭 სპეციალური შოუები",
+
+                    "🏎️ ატრაქციონები"
+
+                ],
+
+                price:
+                    "ფასი: 10 ₾-დან"
+
+            },
+
+
+            gallery: {
+
+                icon: "📸",
+
+                title:
+                    "გალერეა",
+
+                description:
+                    "ნახე JOY Fun Center-ის მხიარული და დაუვიწყარი მომენტები.",
+
+                items: [
+
+                    "🎂 დაბადების დღეები",
+
+                    "🎮 თამაშები",
+
+                    "🎉 ღონისძიებები",
+
+                    "📸 სტუმრების ფოტოები"
+
+                ],
+
+                price:
+                    "ახალი ფოტოები მალე დაემატება"
+
+            },
+
+
+            about: {
+
+                icon: "💛",
+
+                title:
+                    "ჩვენ შესახებ",
+
+                description:
+                    "JOY Fun Center არის სივრცე, სადაც ბავშვებს, მოზარდებსა და ოჯახებს შეუძლიათ ერთად გაერთონ.",
+
+                items: [
+
+                    "🎮 თანამედროვე გასართობი სივრცე",
+
+                    "🎂 დაბადების დღეები",
+
+                    "🎉 სპეციალური ღონისძიებები",
+
+                    "👨‍👩‍👧‍👦 გართობა ყველა ასაკისთვის"
+
+                ],
+
+                price:
+                    "გელოდებით JOY-ში 💛"
+
+            },
+
+
+            contact: {
+
+                icon: "📞",
+
+                title:
+                    "კონტაქტი",
+
+                description:
+                    "დაგვიკავშირდი დამატებითი ინფორმაციისთვის ან დაჯავშნისთვის.",
+
+                items: [
+
+                    "📞 +995 571 81 11 88",
+
+                    "📍 თბილისი: ცოტნე დადიანის ქუჩა N195",
+
+                    "📧 info@joyful.ge"
+
+                ],
+
+                price:
+                    "გელოდებით JOY Fun Center-ში!"
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           OPEN TOP MENU MODAL
+        ====================================================== */
+
+        navigationLinks.forEach(
+            function(link) {
+
+                link.addEventListener(
+                    "click",
+                    function(event) {
+
+                        const menuName =
+                            this.dataset.menu;
+
+
+                        /* მთავარი */
+
+                        if (
+                            menuName === "home"
+                        ) {
+
+                            event.preventDefault();
+
+
+                            closeInfoModal();
+
+                            closeAgeInformation();
+
+                            closeActivityInformation();
+
+
+                            window.scrollTo({
+
+                                top: 0,
+
+                                behavior: "smooth"
+
+                            });
+
+
+                            return;
+
+                        }
+
+
+                        const information =
+                            menuInformation[
+                                menuName
+                            ];
+
+
+                        if (!information) {
+
+                            return;
+
+                        }
+
+
+                        event.preventDefault();
+
+
+                        modalIcon.textContent =
+                            information.icon;
+
+
+                        modalTitle.textContent =
+                            information.title;
+
+
+                        modalDescription.textContent =
+                            information.description;
+
+
+                        modalPrice.textContent =
+                            "💰 " +
+                            information.price;
+
+
+                        modalItems.innerHTML =
+                            "";
+
+
+                        information.items.forEach(
+                            function(item) {
+
+                                const itemElement =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                itemElement.className =
+                                    "modal-item";
+
+
+                                itemElement.textContent =
+                                    item;
+
+
+                                modalItems.appendChild(
+                                    itemElement
+                                );
+
+                            }
+                        );
+
+
+                        infoModal.classList.add(
+                            "show"
+                        );
+
+
+                        document.body.style.overflow =
+                            "hidden";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CLOSE TOP MODAL
+        ====================================================== */
+
+        function closeInfoModal() {
+
+            if (!infoModal) {
+
+                return;
+
+            }
+
+
+            infoModal.classList.remove(
+                "show"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        if (closeModal) {
+
+            closeModal.addEventListener(
+                "click",
+                closeInfoModal
+            );
+
+        }
+
+
+        if (infoModal) {
+
+            infoModal.addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target ===
+                        infoModal
+                    ) {
+
+                        closeInfoModal();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           AGE MODAL ELEMENTS
+        ====================================================== */
+
+        const ageModal =
+            document.getElementById(
+                "ageModal"
+            );
+
+        const closeAgeModal =
+            document.getElementById(
+                "closeAgeModal"
+            );
+
+        const ageModalIcon =
+            document.getElementById(
+                "ageModalIcon"
+            );
+
+        const ageModalTitle =
+            document.getElementById(
+                "ageModalTitle"
+            );
+
+        const ageModalDescription =
+            document.getElementById(
+                "ageModalDescription"
+            );
+
+        const ageModalItems =
+            document.getElementById(
+                "ageModalItems"
+            );
+
+        const ageModalPrice =
+            document.getElementById(
+                "ageModalPrice"
+            );
+
+
+
+        /* =====================================================
+           AGE INFORMATION
+        ====================================================== */
+
+        const ageInformation = {
+
+
+            kids: {
+
+                icon: "☺",
+
+                title:
+                    "გართობა 3–8 წლის ბავშვებისთვის",
+
+                description:
+                    "პატარებისთვის შექმნილი უსაფრთხო და მხიარული გარემო.",
+
+                items: [
+
+                    "🎈 ბუშტების შოუ",
+
+                    "🎮 საბავშვო თამაშები",
+
+                    "🎨 შემოქმედებითი აქტივობები",
+
+                    "🎭 ანიმატორი",
+
+                    "🎉 გასართობი პროგრამა",
+
+                    "📸 ფოტო და ვიდეო"
+
+                ],
+
+                price:
+                    "ფასი: 20 ₾-დან"
+
+            },
+
+
+            teens: {
+
+                icon: "🎮",
+
+                title:
+                    "გართობა 9–14 წლისთვის",
+
+                description:
+                    "აქტიური თამაშები და თავგადასავლები მოზარდებისთვის.",
+
+                items: [
+
+                    "🎮 თანამედროვე თამაშები",
+
+                    "🥽 ვირტუალური რეალობა",
+
+                    "🏎️ ატრაქციონები",
+
+                    "🎯 გასართობი აქტივობები",
+
+                    "🔥 სპეციალური შოუები",
+
+                    "🎉 ჯგუფური თამაშები"
+
+                ],
+
+                price:
+                    "ფასი: 25 ₾-დან"
+
+            },
+
+
+            young: {
+
+                icon: "👥",
+
+                title:
+                    "გართობა 15–20 წლისთვის",
+
+                description:
+                    "მეტი ემოცია, მუსიკა, თამაშები და თავგადასავალი მეგობრებთან ერთად.",
+
+                items: [
+
+                    "🎮 თანამედროვე თამაშები",
+
+                    "🥽 ვირტუალური რეალობა",
+
+                    "🏎️ ატრაქციონები",
+
+                    "🎵 მუსიკა",
+
+                    "🔥 სპეციალური შოუები",
+
+                    "👥 მეგობრებთან ერთად გართობა"
+
+                ],
+
+                price:
+                    "ფასი: 30 ₾-დან"
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           OPEN AGE MODAL
+        ====================================================== */
+
+        const ageButtons =
+            document.querySelectorAll(
+                ".age-button"
+            );
+
+
+        ageButtons.forEach(
+            function(card) {
+
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        const ageName =
+                            this.dataset.age;
+
+
+                        const information =
+                            ageInformation[
+                                ageName
+                            ];
+
+
+                        if (!information) {
+
+                            return;
+
+                        }
+
+
+                        closeInfoModal();
+
+                        closeActivityInformation();
+
+
+                        ageModalIcon.textContent =
+                            information.icon;
+
+
+                        ageModalTitle.textContent =
+                            information.title;
+
+
+                        ageModalDescription.textContent =
+                            information.description;
+
+
+                        ageModalPrice.textContent =
+                            "💰 " +
+                            information.price;
+
+
+                        ageModalItems.innerHTML =
+                            "";
+
+
+                        information.items.forEach(
+                            function(item) {
+
+                                const itemElement =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                itemElement.className =
+                                    "modal-item";
+
+
+                                itemElement.textContent =
+                                    item;
+
+
+                                ageModalItems.appendChild(
+                                    itemElement
+                                );
+
+                            }
+                        );
+
+
+                        ageModal.classList.add(
+                            "show"
+                        );
+
+
+                        document.body.style.overflow =
+                            "hidden";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CLOSE AGE MODAL
+        ====================================================== */
+
+        function closeAgeInformation() {
+
+            if (!ageModal) {
+
+                return;
+
+            }
+
+
+            ageModal.classList.remove(
+                "show"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        if (closeAgeModal) {
+
+            closeAgeModal.addEventListener(
+                "click",
+                closeAgeInformation
+            );
+
+        }
+
+
+        if (ageModal) {
+
+            ageModal.addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target ===
+                        ageModal
+                    ) {
+
+                        closeAgeInformation();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ACTIVITY MODAL ELEMENTS
+        ====================================================== */
+
+        const activityModal =
+            document.getElementById(
+                "activityModal"
+            );
+
+        const closeActivityModal =
+            document.getElementById(
+                "closeActivityModal"
+            );
+
+        const activityModalIcon =
+            document.getElementById(
+                "activityModalIcon"
+            );
+
+        const activityModalTitle =
+            document.getElementById(
+                "activityModalTitle"
+            );
+
+        const activityModalDescription =
+            document.getElementById(
+                "activityModalDescription"
+            );
+
+        const activityModalItems =
+            document.getElementById(
+                "activityModalItems"
+            );
+
+        const activityModalPrice =
+            document.getElementById(
+                "activityModalPrice"
+            );
+
+
+
+        /* =====================================================
+           ACTIVITY INFORMATION
+        ====================================================== */
+
+        const activityInformation = {
+
+
+            games: {
+
+                icon: "🎮",
+
+                title:
+                    "გასართობი თამაშები",
+
+                description:
+                    "თანამედროვე თამაშები და გასართობი სივრცეები, სადაც მეგობრებთან ერთად დაუვიწყარ დროს გაატარებ.",
+
+                items: [
+
+                    "🎮 სხვადასხვა გასართობი თამაშები",
+
+                    "🥽 ვირტუალური რეალობა",
+
+                    "🔥 ცეცხლის შოუ",
+
+                    "🎈 ბუშტების შოუ",
+
+                    "🎭 სპეციალური შოუები",
+
+                    "🎉 გასართობი აქტივობები"
+
+                ],
+
+                price:
+                    "ფასი: 10 ₾-დან"
+
+            },
+
+
+            birthday: {
+
+                icon: "🎂",
+
+                title:
+                    "დაბადების დღის პროგრამა",
+
+                description:
+                    "შექმენი განსაკუთრებული და დაუვიწყარი დაბადების დღე მეგობრებთან ერთად JOY Fun Center-ში.",
+
+                items: [
+
+                    "🎂 დაბადების დღის პაკეტები",
+
+                    "🎈 ბუშტების დეკორაცია",
+
+                    "🎭 ანიმატორი",
+
+                    "🎵 მუსიკა და გართობა",
+
+                    "🍕 საკვები და სასმელი",
+
+                    "📸 ფოტო და ვიდეო"
+
+                ],
+
+                price:
+                    "ფასი: 50 ₾-დან"
+
+            },
+
+
+            attractions: {
+
+                icon: "🏎️",
+
+                title:
+                    "ატრაქციონები",
+
+                description:
+                    "ემოციებით სავსე ატრაქციონები და აქტივობები ბავშვებისთვის, მოზარდებისთვის და მეგობრებისთვის.",
+
+                items: [
+
+                    "🏎️ სხვადასხვა ატრაქციონები",
+
+                    "🎮 თანამედროვე თამაშები",
+
+                    "🥽 ვირტუალური რეალობა",
+
+                    "🔥 სპეციალური შოუები",
+
+                    "🎯 გასართობი აქტივობები"
+
+                ],
+
+                price:
+                    "ფასი: 10 ₾-დან"
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           OPEN ACTIVITY MODAL
+        ====================================================== */
+
+        const activityButtons =
+            document.querySelectorAll(
+                ".activity-more"
+            );
+
+
+        activityButtons.forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function(event) {
+
+                        /* ღილაკზე დაჭერისას
+                           article-ის click არ გვჭირდება */
+
+                        event.stopPropagation();
+
+
+                        const activityName =
+                            this.dataset.activity;
+
+
+                        openActivityInformation(
+                            activityName
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CLICK ENTIRE ACTIVITY CARD
+        ====================================================== */
+
+        const activityCards =
+            document.querySelectorAll(
+                ".activity-card"
+            );
+
+
+        activityCards.forEach(
+            function(card) {
+
+                card.addEventListener(
+                    "click",
+                    function() {
+
+                        const activityName =
+                            this.dataset.activity;
+
+
+                        openActivityInformation(
+                            activityName
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           OPEN ACTIVITY FUNCTION
+        ====================================================== */
+
+        function openActivityInformation(
+            activityName
+        ) {
+
+            const information =
+                activityInformation[
+                    activityName
+                ];
+
+
+            if (!information) {
+
+                return;
+
+            }
+
+
+            closeInfoModal();
+
+            closeAgeInformation();
+
+
+            activityModalIcon.textContent =
+                information.icon;
+
+
+            activityModalTitle.textContent =
+                information.title;
+
+
+            activityModalDescription.textContent =
+                information.description;
+
+
+            activityModalPrice.textContent =
+                "💰 " +
+                information.price;
+
+
+            activityModalItems.innerHTML =
+                "";
+
+
+            information.items.forEach(
+                function(item) {
+
+                    const itemElement =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    itemElement.className =
+                        "activity-modal-item";
+
+
+                    itemElement.textContent =
+                        item;
+
+
+                    activityModalItems.appendChild(
+                        itemElement
+                    );
+
+                }
+            );
+
+
+            activityModal.classList.add(
+                "show"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+
+        /* =====================================================
+           CLOSE ACTIVITY MODAL
+        ====================================================== */
+
+        function closeActivityInformation() {
+
+            if (!activityModal) {
+
+                return;
+
+            }
+
+
+            activityModal.classList.remove(
+                "show"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        if (closeActivityModal) {
+
+            closeActivityModal.addEventListener(
+                "click",
+                closeActivityInformation
+            );
+
+        }
+
+
+        if (activityModal) {
+
+            activityModal.addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target ===
+                        activityModal
+                    ) {
+
+                        closeActivityInformation();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ESC — CLOSE ALL MODALS
+        ====================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeInfoModal();
+
+                    closeAgeInformation();
+
+                    closeActivityInformation();
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           FOOTER HOME
+        ====================================================== */
+
+        const footerHome =
+            document.querySelector(
+                '[data-footer-menu="home"]'
+            );
+
+
+        if (footerHome) {
+
+            footerHome.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    window.scrollTo({
+
+                        top: 0,
+
+                        behavior: "smooth"
+
+                    });
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           SMOOTH SCROLL FOR INTERNAL LINKS
+        ====================================================== */
+
+        document
+            .querySelectorAll(
+                'a[href^="#"]'
+            )
+            .forEach(
+                function(link) {
+
+                    link.addEventListener(
+                        "click",
+                        function(event) {
+
+                            const targetId =
+                                this.getAttribute(
+                                    "href"
+                                );
+
+
+                            if (
+                                !targetId ||
+                                targetId === "#"
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            const target =
+                                document.querySelector(
+                                    targetId
+                                );
+
+
+                            if (!target) {
+
+                                return;
+
+                            }
+
+
+                            /*
+                             * Modal-ის მენიუები აქ არ
+                             * უნდა დამუშავდეს.
+                             */
+
+                            if (
+                                this.dataset.menu
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            event.preventDefault();
+
+
+                            target.scrollIntoView({
+
+                                behavior:
+                                    "smooth",
+
+                                block:
+                                    "start"
+
+                            });
+
+
+                            if (navigation) {
+
+                                navigation.classList.remove(
+                                    "mobile-open"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =====================================================
+           SCROLL ANIMATION
+        ====================================================== */
+
+        const animatedElements =
+            document.querySelectorAll(
+                ".age-card, .activity-card, .stats-grid, .booking-content"
+            );
+
+
+        animatedElements.forEach(
+            function(element) {
+
+                element.style.opacity =
+                    "0";
+
+                element.style.transform =
+                    "translateY(30px)";
+
+                element.style.transition =
+                    "opacity 0.7s ease, transform 0.7s ease";
+
+            }
+        );
+
+
+        if (
+            "IntersectionObserver"
+            in window
+        ) {
+
+            const observer =
+                new IntersectionObserver(
+
+                    function(entries) {
+
+                        entries.forEach(
+                            function(entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    entry.target.style.opacity =
+                                        "1";
+
+                                    entry.target.style.transform =
+                                        "translateY(0)";
+
+
+                                    observer.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+
+                    {
+                        threshold: 0.15
+                    }
+
+                );
+
+
+            animatedElements.forEach(
+                function(element) {
+
+                    observer.observe(
+                        element
+                    );
+
+                }
+            );
+
+        } else {
+
+            animatedElements.forEach(
+                function(element) {
+
+                    element.style.opacity =
+                        "1";
+
+                    element.style.transform =
+                        "translateY(0)";
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           BUTTON HOVER EFFECT
+        ====================================================== */
+
+        const buttons =
+            document.querySelectorAll(
+                ".primary-button, .secondary-button, .nav-button"
+            );
+
+
+        buttons.forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "mouseenter",
+                    function() {
+
+                        this.style.transform =
+                            "translateY(-3px)";
+
+                    }
+                );
+
+
+                button.addEventListener(
+                    "mouseleave",
+                    function() {
+
+                        this.style.transform =
+                            "translateY(0)";
+
+                    }
+                );
+
+            }
+        );
+
+
+
+        /* =====================================================
+           PAGE LOADED
+        ====================================================== */
+
+        console.log(
+            "JOY Fun Center website loaded successfully! 🎉"
+        );
+
+    </script>
+
+
+</body>
+
+</html>
